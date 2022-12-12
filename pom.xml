@@ -31,74 +31,34 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <!-- use version 2.1.0 or higher -->
-            <version>2.1.0</version>
+            <version>3.4.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <profiles>
         <profile>
-            <id>SumSub</id>
+            <id>Sumsub</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-surefire-plugin</artifactId>
-                            <version>3.0.0-M5</version>
-                            <configuration>
-                                <suiteXmlFiles>
-                                    <suiteXmlFile>${project.basedir}/src/test/resources/sumsub.xml</suiteXmlFile>
-                                </suiteXmlFiles>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
+            <properties>
+                <suite.xml.file>sumsub.xml</suite.xml.file>
+            </properties>
         </profile>
         <profile>
-            <id>MultDiv</id>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-surefire-plugin</artifactId>
-                            <version>3.0.0-M5</version>
-                            <configuration>
-                                <suiteXmlFiles>
-                                    <suiteXmlFile>${project.basedir}/src/test/resources/multdiv.xml</suiteXmlFile>
-                                </suiteXmlFiles>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
+            <id>Multdiv</id>
+            <properties>
+                <suite.xml.file>multdiv.xml</suite.xml.file>
+            </properties>
         </profile>
         <profile>
-            <id>FullRegressionSuit</id>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-surefire-plugin</artifactId>
-                            <version>3.0.0-M5</version>
-                            <configuration>
-                                <suiteXmlFiles>
-                                    <suiteXmlFile>${project.basedir}/src/test/resources/testng.xml</suiteXmlFile>
-                                </suiteXmlFiles>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
+            <id>Mainsuite</id>
+            <properties>
+                <suite.xml.file>testng.xml</suite.xml.file>
+            </properties>
         </profile>
     </profiles>
-
 
     <build>
         <plugins>
@@ -106,19 +66,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
-            </plugin>
-            <plugin>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
-                <version>2.1.0</version>
                 <configuration>
-                    <packages>
-                        <param>your.first.package</param>
-                        <param>your.second.package</param>
-                    </packages>
-                    <classes>
-                        <param>your.third.package.YourClass</param>
-                    </classes>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${project.basedir}/src/test/resources/${suite.xml.file}</suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
             </plugin>
             <plugin>

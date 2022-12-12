@@ -3,7 +3,7 @@
 <suite name="FullRegression" verbose="1" >
     <test name="MainSuite" >
         <classes>
-            <class name="com.epam.tc.hw1.TestCalcSum" />
+            <class name="com.epam.tc.hw1.TestCalcSum"/>
             <class name="com.epam.tc.hw1.TestCalcSub"/>
             <class name="com.epam.tc.hw1.TestCalcMult"/>
             <class name="com.epam.tc.hw1.TestCalcDiv"/>
