@@ -28,15 +28,13 @@ public class TestCalcDiv extends AbstractCalcTest {
     @Test(groups = "mult and div", expectedExceptions = NumberFormatException.class)
     public void divTwoDigitsDevideByZero() {
 
-            var act = calculator.div(0L, 0L);
-
-            Assertions.fail("Exception 'NumberFormatException' is expected");
+        calculator.div(0L, 0L);
     }
 
     @Test(groups = "mult and div", expectedExceptions = NumberFormatException.class)
     public void divTwoDoubleDigitsDevideByZero() {
 
-            Assertions.fail("Exception 'NumberFormatException' is expected");
+        calculator.div(0.0, 0.0);
     }
 
 }
