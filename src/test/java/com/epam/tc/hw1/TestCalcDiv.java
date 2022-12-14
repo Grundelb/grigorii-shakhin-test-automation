@@ -25,30 +25,18 @@ public class TestCalcDiv extends AbstractCalcTest {
                 .isEqualTo(result, withPrecision(0.001));
     }
 
-    @Test(groups = "mult and div")
+    @Test(groups = "mult and div", expectedExceptions = NumberFormatException.class)
     public void divTwoDigitsDevideByZero() {
 
-        try {
             var act = calculator.div(0L, 0L);
 
             Assertions.fail("Exception 'NumberFormatException' is expected");
-
-        } catch (NumberFormatException e) {
-            //checkstyle
-        }
     }
 
-    @Test(groups = "mult and div")
+    @Test(groups = "mult and div", expectedExceptions = NumberFormatException.class)
     public void divTwoDoubleDigitsDevideByZero() {
 
-        try {
-            var act = calculator.div(0.0, 0.0);
-
             Assertions.fail("Exception 'NumberFormatException' is expected");
-
-        } catch (NumberFormatException e) {
-            //checkstyle
-        }
     }
 
 }
