@@ -69,6 +69,12 @@
                 <suite.xml.file>testng.xml</suite.xml.file>
             </properties>
         </profile>
+        <profile>
+            <id>ex1ex2</id>
+            <properties>
+                <suite.xml.file>ex1ex2.xml</suite.xml.file>
+            </properties>
+        </profile>
     </profiles>
 
     <build>

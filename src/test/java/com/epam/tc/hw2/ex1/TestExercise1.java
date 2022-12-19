@@ -1,33 +1,13 @@
 package com.epam.tc.hw2.ex1;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.epam.tc.hw2.WebDriverSetup;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
-public class TestExercise1 {
-    static WebDriver driver;
-
-    @BeforeMethod
-    static void setupAll() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        new WebDriverWait(driver, 10, 1000);
-    }
-
-    @AfterMethod
-    void teardown() {
-        if (driver != null) {
-            driver.quit();
-        }
+public class TestExercise1 extends WebDriverSetup {
+    public TestExercise1() {
     }
 
     @Test
@@ -36,7 +16,6 @@ public class TestExercise1 {
 
         //Open test site by URL
         driver.get("https://jdi-testing.github.io/jdi-light/index.html");
-
         //Assert Browser title
         softly.assertThat(driver.getTitle()).contains("Home Page");
 
@@ -72,29 +51,37 @@ public class TestExercise1 {
                 .isDisplayed());
 
         //Assert that there are 4 texts on the Index Page under icons and they have proper text
-        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-practise']" +
-                        "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
-                .getText()).isEqualTo("To include good practices\nand ideas from successful\nEPAM project");
-        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-practise']" +
-                "/parent::div/following-sibling::span[@class = 'benefit-txt']")).isDisplayed());
-        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-custom']" +
-                        "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
-                .getText()).isEqualTo("To be flexible and\ncustomizable");
-        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-custom']" +
-                        "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
+        softly.assertThat(driver.findElement(By.xpath("//span"
+                        + "[@class='icons-benefit icon-practise']"
+                        + "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
+                .getText()).isEqualTo("To include good practices"
+                        + "\nand ideas from successful\nEPAM project");
+        softly.assertThat(driver.findElement(By.xpath("//span"
+                        + "[@class='icons-benefit icon-practise']"
+                        + "/parent::div/following-sibling::span[@class = 'benefit-txt']")).isDisplayed());
+        softly.assertThat(driver.findElement(By.xpath("//span"
+                        + "[@class='icons-benefit icon-custom']"
+                        + "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
+                .getText()).isEqualTo("To be flexible and"
+                + "\ncustomizable");
+        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-custom']"
+                        + "/parent::div/following-sibling::span"
+                        + "[@class = 'benefit-txt']"))
                 .isDisplayed());
-        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-multi']" +
-                        "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
+        softly.assertThat(driver.findElement(By.xpath("//span"
+                        + "[@class='icons-benefit icon-multi']"
+                        + "/parent::div/following-sibling::span"
+                        + "[@class = 'benefit-txt']"))
                 .getText()).isEqualTo("To be multiplatform");
-        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-multi']" +
-                        "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
+        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-multi']"
+                        + "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
                 .isDisplayed());
-        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-base']" +
-                        "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
-                .getText()).isEqualTo("Already have good base\n(about 20 internal and\n" +
-                "some external projects),\nwish to get more…");
-        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-base']" +
-                        "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
+        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-base']"
+                        + "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
+                .getText()).isEqualTo("Already have good base\n(about 20 internal and\n"
+                        + "some external projects),\nwish to get more…");
+        softly.assertThat(driver.findElement(By.xpath("//span[@class='icons-benefit icon-base']"
+                        + "/parent::div/following-sibling::span[@class = 'benefit-txt']"))
                 .isDisplayed());
 
         //Assert that there is the iframe with “Frame Button” exist
