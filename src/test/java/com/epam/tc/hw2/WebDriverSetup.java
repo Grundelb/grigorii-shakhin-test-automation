@@ -10,12 +10,9 @@ import org.testng.annotations.BeforeClass;
 public abstract class WebDriverSetup {
     protected WebDriver driver;
 
-    public WebDriverSetup() {
-        this.driver = new ChromeDriver();
-    }
-
     @BeforeClass
     protected void setDriver() {
+        driver = new ChromeDriver();
         WebDriverManager.chromedriver().setup();
         driver.manage().window().maximize();
         //set waits

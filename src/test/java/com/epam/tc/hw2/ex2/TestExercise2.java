@@ -6,9 +6,6 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 public class TestExercise2 extends WebDriverSetup {
-    public TestExercise2() {
-    }
-
     @Test
     public void checkExercice2() {
         SoftAssertions softly = new SoftAssertions();
