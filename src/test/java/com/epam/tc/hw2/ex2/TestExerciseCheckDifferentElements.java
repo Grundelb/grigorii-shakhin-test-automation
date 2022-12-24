@@ -2,7 +2,6 @@ package com.epam.tc.hw2.ex2;
 
 import com.epam.tc.hw2.WebDriverSetup;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TestExerciseCheckDifferentElements extends WebDriverSetup {

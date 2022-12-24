@@ -3,7 +3,6 @@ package com.epam.tc.hw2.ex1;
 import com.epam.tc.hw2.WebDriverSetup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TestExerciseCheckMainPage extends WebDriverSetup {
