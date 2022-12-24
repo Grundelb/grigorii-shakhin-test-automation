@@ -1,11 +1,10 @@
 package com.epam.tc.hw2.ex2;
 
 import com.epam.tc.hw2.WebDriverSetup;
-import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-public class TestExercise2 extends WebDriverSetup {
+public class TestExerciseCheckDifferentElements extends WebDriverSetup {
     private final String openMainPage = "https://jdi-testing.github.io/jdi-light/index.html";
     private final String dropdownUserIconLocator = "user-icon";
     private final By dropdownUserIcon = By.id(dropdownUserIconLocator);
@@ -42,18 +41,17 @@ public class TestExercise2 extends WebDriverSetup {
     private final String logsContainYellowLocator = "//li[text()[contains(.,'Colors: value changed to Yellow')]]";
     private final By logsContainYellow = By.xpath(logsContainYellowLocator);
 
-    @Test
-    public void checkExercice2() {
-        SoftAssertions softly = new SoftAssertions();
-
-
-        //Open test site by URL
+    @Test(description = "Assert Browser title")
+    public void verifyBrowserTitle() {
         driver.get(openMainPage);
 
-        //Assert Browser title
-        softly.assertThat(driver.getTitle()).contains("Home Page");
+        String actualTitle = driver.getTitle();
 
-        //Perform login
+        softly.assertThat(actualTitle).contains("Home Page");
+    }
+
+    @Test(description = "Assert Username is loggined")
+    public void verifyUserCredentionalsView() {
         driver.findElement(dropdownUserIcon).click();
         driver.findElement(fieldUserName).click();
         driver.findElement(fieldUserName).sendKeys(credentionalsUserName);
@@ -61,30 +59,28 @@ public class TestExercise2 extends WebDriverSetup {
         driver.findElement(fieldUserPassword).sendKeys(credentionalsUserPassword);
         driver.findElement(loginButton).click();
 
-        //Assert Username is loggined
-        softly.assertThat(driver.findElement(userNameHeaderView).getText())
-                .isEqualTo("ROMAN IOVLEV");
+        String actualUserName = driver.findElement(userNameHeaderView).getText();
 
-        //Open through the header menu Service -> Different Elements Page
+        softly.assertThat(actualUserName).isEqualTo("ROMAN IOVLEV");
+    }
+
+    @Test(description = "Assert that"
+            + "• for each checkbox there is an individual log row and value is corresponded to the status of checkbox"
+            + "• for radio button there is a log row and value is corresponded to the status of radio button"
+            + "• for dropdown there is a log row and value is corresponded to the selected value.")
+    public void verifyDifferentElementsPage() {
         driver.findElement(serviceHeaderMenu).click();
         driver.findElement(differentElementsServiceElement)
                 .click();
 
-        //Select checkboxes
         driver.findElement(waterCheckbox).click();
         driver.findElement(windCheckbox).click();
 
-        //Select radio
         driver.findElement(selenRadioButton).click();
 
-        //Select in dropdown
         driver.findElement(colorsDropDownMenu).click();
         driver.findElement(yellowOptionColors).click();
 
-        /*Assert that
-             • for each checkbox there is an individual log row and value is corresponded to the status of checkbox
-             • for radio button there is a log row and value is corresponded to the status of radio button
-             • for dropdown there is a log row and value is corresponded to the selected value.*/
         softly.assertThat(driver.findElement(logsContainWater)
                 .isDisplayed());
         softly.assertThat(driver.findElement(logsContainWind)
@@ -93,7 +89,5 @@ public class TestExercise2 extends WebDriverSetup {
                 .isDisplayed());
         softly.assertThat(driver.findElement(logsContainYellow)
                 .isDisplayed());
-
-        softly.assertAll();
     }
 }

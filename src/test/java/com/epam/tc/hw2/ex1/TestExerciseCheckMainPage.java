@@ -1,12 +1,11 @@
 package com.epam.tc.hw2.ex1;
 
 import com.epam.tc.hw2.WebDriverSetup;
-import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
-public class TestExercise1 extends WebDriverSetup {
+public class TestExerciseCheckMainPage extends WebDriverSetup {
     private final String openMainPage = "https://jdi-testing.github.io/jdi-light/index.html";
     private final String dropdownUserIconLocator = "user-icon";
     private final By dropdownUserIcon = By.id(dropdownUserIconLocator);
@@ -60,17 +59,17 @@ public class TestExercise1 extends WebDriverSetup {
     private final By metalAndColorsLeftMenu = By.partialLinkText("Metals & Colors");
     private final By elementsPacksLeftMenu = By.partialLinkText("Elements packs");
 
-
-    @Test
-    public void checkExercice() {
-        SoftAssertions softly = new SoftAssertions();
-
-        //Open test site by URL
+    @Test(description = "Assert Browser title")
+    public void verifyBrowserTitle() {
         driver.get(openMainPage);
-        //Assert Browser title
-        softly.assertThat(driver.getTitle()).contains("Home Page");
 
-        //Perform login
+        String actualTitle = driver.getTitle();
+
+        softly.assertThat(actualTitle).contains("Home Page");
+    }
+
+    @Test(description = "Assert Username is loggined")
+    public void verifyUserCredentionalsView() {
         driver.findElement(dropdownUserIcon).click();
         driver.findElement(fieldUserName).click();
         driver.findElement(fieldUserName).sendKeys(credentionalsUserName);
@@ -78,19 +77,27 @@ public class TestExercise1 extends WebDriverSetup {
         driver.findElement(fieldUserPassword).sendKeys(credentionalsUserPassword);
         driver.findElement(loginButton).click();
 
-        //Assert Username is loggined
         String actualUserName = driver.findElement(userNameHeaderView).getText();
 
         softly.assertThat(actualUserName).isEqualTo("ROMAN IOVLEV");
+    }
 
-        //Assert that there are 4 items on the header section are displayed and they have proper texts
-        softly.assertThat(driver.findElement(homeHeaderMenu).isDisplayed());
-        softly.assertThat(driver.findElement(contactFormHeaderMenu).isDisplayed());
-        softly.assertThat(driver.findElement(serviceHeaderMenu).isDisplayed());
-        softly.assertThat(driver.findElement(metalsAndColorsHeaderMenu).isDisplayed());
+    @Test(description = "Assert that there are 4 items on the header section are displayed and they have proper texts")
+    public void verifyHeaderMenuElements() {
+        softly.assertThat(driver.findElement(homeHeaderMenu)
+                .isDisplayed());
+        softly.assertThat(driver.findElement(contactFormHeaderMenu)
+                .isDisplayed());
+        softly.assertThat(driver.findElement(serviceHeaderMenu)
+                .isDisplayed());
+        softly.assertThat(driver.findElement(metalsAndColorsHeaderMenu)
+                .isDisplayed());
+    }
 
-        //Assert that there are 4 images on the Index Page and they are displayed
+    @Test(description = "Assert that there are 4 images on the Index Page and they are displayed")
+    public void verifyImages() {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
+
         jse.executeScript(scrollToTheFooter);
 
         softly.assertThat(driver.findElement(iconPractise)
@@ -101,46 +108,58 @@ public class TestExercise1 extends WebDriverSetup {
                 .isDisplayed());
         softly.assertThat(driver.findElement(iconBase)
                 .isDisplayed());
+    }
 
-        //Assert that there are 4 texts on the Index Page under icons and they have proper text
-        softly.assertThat(driver.findElement(textPractise)
-                .getText()).isEqualTo("To include good practices"
+    @Test(description = "Assert that there are 4 texts on the Index Page under icons and they have proper text")
+    public void verifyTexts() {
+        String actualTextPractise = driver.findElement(textPractise).getText();
+
+        softly.assertThat(actualTextPractise).isEqualTo("To include good practices"
                 + "\nand ideas from successful\nEPAM project");
         softly.assertThat(driver.findElement(iconPractise).isDisplayed());
-        softly.assertThat(driver.findElement(textCustom)
-                .getText()).isEqualTo("To be flexible and"
+
+        String actualTextCustom = driver.findElement(textCustom).getText();
+
+        softly.assertThat(actualTextCustom).isEqualTo("To be flexible and"
                 + "\ncustomizable");
         softly.assertThat(driver.findElement(textCustom)
                 .isDisplayed());
-        softly.assertThat(driver.findElement(textMulti)
-                .getText()).isEqualTo("To be multiplatform");
+
+        String actualTextMulti = driver.findElement(textMulti).getText();
+
+        softly.assertThat(actualTextMulti).isEqualTo("To be multiplatform");
         softly.assertThat(driver.findElement(textMulti)
                 .isDisplayed());
-        softly.assertThat(driver.findElement(textBase)
-                .getText()).isEqualTo("Already have good base\n(about 20 internal and\n"
+
+        String actualTextBase = driver.findElement(textBase).getText();
+
+        softly.assertThat(actualTextBase).isEqualTo("Already have good base\n(about 20 internal and\n"
                 + "some external projects),\nwish to get more…");
         softly.assertThat(driver.findElement(textBase)
                 .isDisplayed());
+    }
 
-        //Assert that there is the iframe with “Frame Button” exist
+    @Test(description = "Assert that there is the iframe with “Frame Button” exist "
+            + "and check that there is “Frame Button” in the iframe")
+    public void verifyFrame() {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript(scrollToTheHeader);
+
         softly.assertThat(driver.findElement(frame).isDisplayed());
 
-        //Switch to the iframe and check that there is “Frame Button” in the iframe
         driver.switchTo().frame(frameLocator);
         softly.assertThat(driver.findElement(frameButton).isDisplayed());
 
-        //Switch to original window back
         driver.switchTo().defaultContent();
+    }
 
-        //Assert that there are 5 items in the Left Section are displayed and they have proper text
+    @Test(description = "Assert that there are 5 items in the Left Section are displayed and they have proper text")
+    public void verifyLeftMenuElements() {
         softly.assertThat(driver.findElement(homeLeftMenu).isDisplayed());
         softly.assertThat(driver.findElement(contactFormLeftMenu).isDisplayed());
         softly.assertThat(driver.findElement(serviceLeftMenu).isDisplayed());
         softly.assertThat(driver.findElement(metalAndColorsLeftMenu).isDisplayed());
         softly.assertThat(driver.findElement(elementsPacksLeftMenu).isDisplayed());
-
-        softly.assertAll();
     }
 }
 
