@@ -152,6 +152,7 @@ public class TestExerciseCheckMainPage extends WebDriverSetup {
         softly.assertThat(driver.findElement(frame).isDisplayed());
 
         driver.switchTo().frame(frameLocator);
+
         softly.assertThat(driver.findElement(frameButton).isDisplayed());
 
         driver.switchTo().defaultContent();

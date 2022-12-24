@@ -71,15 +71,11 @@ public class TestExerciseCheckDifferentElements extends WebDriverSetup {
             + "• for dropdown there is a log row and value is corresponded to the selected value.")
     public void verifyDifferentElementsPage() {
         driver.findElement(serviceHeaderMenu).click();
-        driver.findElement(differentElementsServiceElement)
-                .click();
-
+        driver.findElement(differentElementsServiceElement).click();
         waitForElementLocatedBy(driver, waterCheckbox);
         driver.findElement(waterCheckbox).click();
         driver.findElement(windCheckbox).click();
-
         driver.findElement(selenRadioButton).click();
-
         driver.findElement(colorsDropDownMenu).click();
         driver.findElement(yellowOptionColors).click();
 
