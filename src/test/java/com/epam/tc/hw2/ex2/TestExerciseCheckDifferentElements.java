@@ -2,6 +2,7 @@ package com.epam.tc.hw2.ex2;
 
 import com.epam.tc.hw2.WebDriverSetup;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TestExerciseCheckDifferentElements extends WebDriverSetup {
@@ -19,8 +20,7 @@ public class TestExerciseCheckDifferentElements extends WebDriverSetup {
     private final String userNameHeaderViewLocator = "user-name";
     private final By userNameHeaderView = By.id(userNameHeaderViewLocator);
     private final By serviceHeaderMenu = By.partialLinkText("SERVICE");
-    private final String differentElementsServiceElementLocator = "//span"
-            + "[@class='caret']/parent::a/following-sibling::ul/li/a[text()='Different elements']";
+    private final String differentElementsServiceElementLocator = "//a[text()='Different elements']";
     private final By differentElementsServiceElement = By.xpath(differentElementsServiceElementLocator);
     private final String waterCheckboxLocator = "//*[text()[contains(.,'Water')]]/input";
     private final By waterCheckbox = By.xpath(waterCheckboxLocator);
@@ -41,7 +41,7 @@ public class TestExerciseCheckDifferentElements extends WebDriverSetup {
     private final String logsContainYellowLocator = "//li[text()[contains(.,'Colors: value changed to Yellow')]]";
     private final By logsContainYellow = By.xpath(logsContainYellowLocator);
 
-    @Test(description = "Assert Browser title")
+    @Test(priority = 1, description = "Assert Browser title")
     public void verifyBrowserTitle() {
         driver.get(openMainPage);
 
@@ -50,9 +50,11 @@ public class TestExerciseCheckDifferentElements extends WebDriverSetup {
         softly.assertThat(actualTitle).contains("Home Page");
     }
 
-    @Test(description = "Assert Username is loggined")
+    @Test(priority = 2, description = "Assert Username is loggined")
     public void verifyUserCredentionalsView() {
+        waitForElementLocatedBy(driver, dropdownUserIcon);
         driver.findElement(dropdownUserIcon).click();
+        waitForElementLocatedBy(driver, fieldUserName);
         driver.findElement(fieldUserName).click();
         driver.findElement(fieldUserName).sendKeys(credentionalsUserName);
         driver.findElement(fieldUserPassword).click();
@@ -64,7 +66,7 @@ public class TestExerciseCheckDifferentElements extends WebDriverSetup {
         softly.assertThat(actualUserName).isEqualTo("ROMAN IOVLEV");
     }
 
-    @Test(description = "Assert that"
+    @Test(priority = 3, description = "Assert that"
             + "• for each checkbox there is an individual log row and value is corresponded to the status of checkbox"
             + "• for radio button there is a log row and value is corresponded to the status of radio button"
             + "• for dropdown there is a log row and value is corresponded to the selected value.")
@@ -73,6 +75,7 @@ public class TestExerciseCheckDifferentElements extends WebDriverSetup {
         driver.findElement(differentElementsServiceElement)
                 .click();
 
+        waitForElementLocatedBy(driver, waterCheckbox);
         driver.findElement(waterCheckbox).click();
         driver.findElement(windCheckbox).click();
 

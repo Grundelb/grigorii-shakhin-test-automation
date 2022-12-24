@@ -3,6 +3,7 @@ package com.epam.tc.hw2.ex1;
 import com.epam.tc.hw2.WebDriverSetup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TestExerciseCheckMainPage extends WebDriverSetup {
@@ -59,7 +60,7 @@ public class TestExerciseCheckMainPage extends WebDriverSetup {
     private final By metalAndColorsLeftMenu = By.partialLinkText("Metals & Colors");
     private final By elementsPacksLeftMenu = By.partialLinkText("Elements packs");
 
-    @Test(description = "Assert Browser title")
+    @Test(priority = 1, description = "Assert Browser title")
     public void verifyBrowserTitle() {
         driver.get(openMainPage);
 
@@ -68,9 +69,11 @@ public class TestExerciseCheckMainPage extends WebDriverSetup {
         softly.assertThat(actualTitle).contains("Home Page");
     }
 
-    @Test(description = "Assert Username is loggined")
+    @Test(priority = 2, description = "Assert Username is loggined")
     public void verifyUserCredentionalsView() {
+        waitForElementLocatedBy(driver, dropdownUserIcon);
         driver.findElement(dropdownUserIcon).click();
+        waitForElementLocatedBy(driver, fieldUserName);
         driver.findElement(fieldUserName).click();
         driver.findElement(fieldUserName).sendKeys(credentionalsUserName);
         driver.findElement(fieldUserPassword).click();
@@ -82,7 +85,8 @@ public class TestExerciseCheckMainPage extends WebDriverSetup {
         softly.assertThat(actualUserName).isEqualTo("ROMAN IOVLEV");
     }
 
-    @Test(description = "Assert that there are 4 items on the header section are displayed and they have proper texts")
+    @Test(priority = 3, description = "Assert that there are 4 items on the header section are displayed"
+            + " and they have proper texts")
     public void verifyHeaderMenuElements() {
         softly.assertThat(driver.findElement(homeHeaderMenu)
                 .isDisplayed());
@@ -94,7 +98,7 @@ public class TestExerciseCheckMainPage extends WebDriverSetup {
                 .isDisplayed());
     }
 
-    @Test(description = "Assert that there are 4 images on the Index Page and they are displayed")
+    @Test(priority = 3, description = "Assert that there are 4 images on the Index Page and they are displayed")
     public void verifyImages() {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
 
@@ -110,7 +114,8 @@ public class TestExerciseCheckMainPage extends WebDriverSetup {
                 .isDisplayed());
     }
 
-    @Test(description = "Assert that there are 4 texts on the Index Page under icons and they have proper text")
+    @Test(priority = 3, description = "Assert that there are 4 texts "
+            + "on the Index Page under icons and they have proper text")
     public void verifyTexts() {
         String actualTextPractise = driver.findElement(textPractise).getText();
 
@@ -139,7 +144,7 @@ public class TestExerciseCheckMainPage extends WebDriverSetup {
                 .isDisplayed());
     }
 
-    @Test(description = "Assert that there is the iframe with “Frame Button” exist "
+    @Test(priority = 4, description = "Assert that there is the iframe with “Frame Button” exist "
             + "and check that there is “Frame Button” in the iframe")
     public void verifyFrame() {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -153,7 +158,8 @@ public class TestExerciseCheckMainPage extends WebDriverSetup {
         driver.switchTo().defaultContent();
     }
 
-    @Test(description = "Assert that there are 5 items in the Left Section are displayed and they have proper text")
+    @Test(priority = 4, description = "Assert that there are 5 items "
+            + "in the Left Section are displayed and they have proper text")
     public void verifyLeftMenuElements() {
         softly.assertThat(driver.findElement(homeLeftMenu).isDisplayed());
         softly.assertThat(driver.findElement(contactFormLeftMenu).isDisplayed());
