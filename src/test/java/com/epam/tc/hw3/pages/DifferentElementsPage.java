@@ -1,4 +1,4 @@
-package com.epam.tc.hw3.page;
+package com.epam.tc.hw3.pages;
 
 public class DifferentElementsPage {
 }

@@ -1,20 +1,18 @@
-package com.epam.tc.hw3.page;
+package com.epam.tc.hw3.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public abstract class AbstractPage {
     protected WebDriver driver;
-
+    protected static final String HOMEPAGE_URL = "https://jdi-testing.github.io/jdi-light/index.html";
     protected final int WAIT_TIMEOUT_SECONDS = 10;
-    protected abstract void openPage();
 
-    protected AbstractPage(WebDriver driver) {
+    protected abstract void openPage(
+    );
+
+    public AbstractPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
-
-
-
 }
