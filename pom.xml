@@ -34,6 +34,17 @@
             <version>3.4.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -53,9 +64,15 @@
             </properties>
         </profile>
         <profile>
-            <id>Mainsuite</id>
+            <id>hw3</id>
             <properties>
                 <suite.xml.file>testng.xml</suite.xml.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>FullRegression</id>
+            <properties>
+                <suite.xml.file>hwCalc.xml</suite.xml.file>
             </properties>
         </profile>
     </profiles>
