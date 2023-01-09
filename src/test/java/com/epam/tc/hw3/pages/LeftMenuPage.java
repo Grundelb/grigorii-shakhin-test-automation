@@ -1,13 +1,13 @@
 package com.epam.tc.hw3.pages;
 
+
+import java.util.ArrayList;
+import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class LeftMenuPage extends AbstractPage{
+public class LeftMenuPage extends AbstractPage {
 
     @FindBy(partialLinkText = "Home")
     private WebElement homeLeftMenu;
@@ -26,7 +26,6 @@ public class LeftMenuPage extends AbstractPage{
 
     @Override
     protected void openPage() {
-
     }
 
     public List<WebElement> verifyLeftMenu() {

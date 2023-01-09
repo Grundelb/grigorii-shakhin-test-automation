@@ -9,8 +9,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
-import java.util.concurrent.TimeUnit;
-
 public abstract class AbstractTest {
 
     protected SoftAssertions softly;
@@ -39,14 +37,4 @@ public abstract class AbstractTest {
     protected void completeSoftAssert() {
         softly.assertAll();
     }
-
-    @BeforeMethod
-    public void setUp() {
-        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.MILLISECONDS);
-        driver.manage().timeouts().pageLoadTimeout(10000, TimeUnit.MILLISECONDS);
-        driver.manage().timeouts().setScriptTimeout(3000, TimeUnit.MILLISECONDS);
-    }
-
-
-
 }

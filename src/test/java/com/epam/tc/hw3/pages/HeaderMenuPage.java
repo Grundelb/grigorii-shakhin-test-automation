@@ -1,16 +1,17 @@
 package com.epam.tc.hw3.pages;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HeaderMenuPage extends AbstractPage {
     private final String credentionalsUserName = "Roman";
     private final String credentionalsUserPassword = "Jdi1234";
 
+    @FindBy(xpath = "//a[text()='Different elements']")
+    private WebElement differentElementsServiceElement;
     @FindBy(id = "user-icon")
     private WebElement dropdownUserIcon;
     @FindBy(id = "name")
@@ -61,6 +62,7 @@ public class HeaderMenuPage extends AbstractPage {
 
     public void login() {
         dropdownUserIcon.click();
+        waitForElementLocatedBy(driver, fieldUserName);
         fieldUserName.click();
         fieldUserName.sendKeys(credentionalsUserName);
         fieldUserPassword.click();
@@ -75,6 +77,12 @@ public class HeaderMenuPage extends AbstractPage {
         webElementList.add(serviceHeaderMenu);
         webElementList.add(metalsAndColorsHeaderMenu);
         return webElementList;
+    }
+
+    public void openDifferentElementsPage() {
+        serviceHeaderMenu.click();
+        waitForElementLocatedBy(driver, differentElementsServiceElement);
+        differentElementsServiceElement.click();
     }
 
 }
