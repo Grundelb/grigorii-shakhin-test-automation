@@ -9,12 +9,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 public abstract class WebDriverSetup {
     protected WebDriver driver;
-    protected final int timeOutWaits = 10;
-    protected SoftAssertions softly = new SoftAssertions();
+    private final int timeOutWaits = 10;
+    protected SoftAssertions softly;
 
     @BeforeClass
     protected void setDriver() {
@@ -30,7 +32,12 @@ public abstract class WebDriverSetup {
         }
     }
 
-    @AfterClass
+    @BeforeMethod
+    protected void createSoftAssert() {
+        softly = new SoftAssertions();
+    }
+
+    @AfterMethod
     protected void completeSoftAssert() {
         softly.assertAll();
         if (softly != null) {
